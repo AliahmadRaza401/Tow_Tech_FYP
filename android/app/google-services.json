@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "535356815470",
+    "project_id": "tow-tech-474e7",
+    "storage_bucket": "tow-tech-474e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535356815470:android:3b8d72055acf13044e8e7f",
+        "android_client_info": {
+          "package_name": "com.example.tow_tech_fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535356815470-n04mirk73nl2qaa251vj7dslh695272h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tow_tech_fyp",
+            "certificate_hash": "ef7712e209e6561706a0634de1164d71342438b3"
+          }
+        },
+        {
+          "client_id": "535356815470-6gmccgl8n2agjifjtujlqidhbaltfq9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUd3IAnkNlrV-Hzprcm4RZ_s9pTDpHU2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535356815470-6gmccgl8n2agjifjtujlqidhbaltfq9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
