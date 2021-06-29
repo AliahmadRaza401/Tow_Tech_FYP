@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Map extends StatefulWidget {
+  var cityType, service;
+  Map({this.cityType, this.service});
+
   @override
   _MapState createState() => _MapState();
 }
@@ -25,6 +29,8 @@ class _MapState extends State<Map> {
     super.initState();
     fToast = FToast();
     fToast.init(context);
+    print(widget.cityType);
+    print(widget.service);
     _getCurrentLocation();
   }
 
@@ -44,6 +50,43 @@ class _MapState extends State<Map> {
     }).catchError((e) {
       print(e);
     });
+  }
+
+  updateDataIntoDatabase() {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+
+    try {
+      db.collection("Users").doc(firebaseUser.uid).update({
+        "CityType": widget.cityType,
+        "Services": widget.service,
+        "Location.latitude": latitude,
+        "Location.longitude": longitude,
+      }).then((_) {
+        print("success!");
+      });
+
+      fToast.showToast(
+          child: toast("Location Save Successfully!"),
+          toastDuration: Duration(seconds: 4),
+          positionedToastBuilder: (context, child) {
+            return Positioned(
+              child: child,
+              left: MediaQuery.of(context).size.width * 0.2,
+              bottom: 250,
+            );
+          });
+    } catch (e) {
+      fToast.showToast(
+          child: toast(e),
+          toastDuration: Duration(seconds: 4),
+          positionedToastBuilder: (context, child) {
+            return Positioned(
+              child: child,
+              left: MediaQuery.of(context).size.width * 0.2,
+              bottom: 250,
+            );
+          });
+    }
   }
 
   @override
@@ -91,23 +134,7 @@ class _MapState extends State<Map> {
                   ),
                   GestureDetector(
                     onTap: () {
-
-                      db.collection("User").add({
-                        "Latitude": latitude,
-                        "Longitude": longitude
-                      });
-
-                      fToast.showToast(
-                          child: toast,
-                          toastDuration: Duration(seconds: 4),
-                          positionedToastBuilder: (context, child) {
-                            return Positioned(
-                              child: child,
-                              left: MediaQuery.of(context).size.width * 0.2,
-                              bottom: 250,
-                            );
-                          }
-                          );
+                      updateDataIntoDatabase();
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 100),
@@ -191,24 +218,26 @@ class _MapState extends State<Map> {
 //   );
 // }
 
-  Widget toast = Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(25.0),
-      color: Color(0xffff9068),
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(Icons.check),
-        SizedBox(
-          width: 12.0,
-        ),
-        Text(
-          "Location Save Successfully",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ],
-    ),
-  );
+  toast(String message) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Color(0xffff9068),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(
+            message,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
 }

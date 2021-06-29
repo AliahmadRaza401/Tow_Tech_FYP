@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,6 +24,7 @@ class _HomeState extends State<Home> {
   // var latitude ;
   // var longitude;
   // bool map = false;
+  // final db = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -376,7 +378,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "City To City",
+                    "Tow Vehicle",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -385,7 +387,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
                     child: Text(
-                      "By using remove.bg you agree to the use of cookies. You can find details on how we use cookies in our Cookie Policy.",
+                      "We are providing the best Tow service for your imported car in an emergency.we are available click and book now our Services",
                       style: TextStyle(
                           color: Color(0xffFFE5E3E3),
                           fontWeight: FontWeight.w400,
@@ -409,74 +411,10 @@ class _HomeState extends State<Home> {
               ),
             ),
             Positioned(
-                bottom: -30,
+                bottom: -20,
                 right: 0,
                 child: Image.asset(
                   "assets/cars/rcar.png",
-                  width: MediaQuery.of(context).size.width * 0.5,
-                ))
-          ],
-        ),
-        // With in City
-        Stack(
-          overflow: Overflow.visible,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              margin: EdgeInsets.symmetric(vertical: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: new LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xffFF3D2C2C),
-                    Colors.blue,
-                  ],
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Within City",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 20),
-                    child: Text(
-                      "By using remove.bg you agree to the use of cookies. You can find details on how we use cookies in our Cookie Policy.",
-                      style: TextStyle(
-                          color: Color(0xffFFE5E3E3),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15),
-                    ),
-                  ),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xffff0000)),
-                      ),
-                      onPressed: () async {
-                        if (await Permission.location.request().isGranted) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Map()));
-                        }
-                      },
-                      child: Text("Book Now"))
-                ],
-              ),
-            ),
-            Positioned(
-                bottom: -30,
-                right: 0,
-                child: Image.asset(
-                  "assets/cars/bcar.webp",
                   width: MediaQuery.of(context).size.width * 0.5,
                 ))
           ],
@@ -505,7 +443,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Contact",
+                    "Technician",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -514,7 +452,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
                     child: Text(
-                      "By using remove.bg you agree to the use of cookies. You can find details on how we use cookies in our Cookie Policy.",
+                      "If you are stuck in the road. Don't worry, click now and get the services from our experienced Tecnician",
                       style: TextStyle(
                           color: Color(0xffFFE5E3E3),
                           fontWeight: FontWeight.w400,
@@ -537,12 +475,80 @@ class _HomeState extends State<Home> {
               ),
             ),
             Positioned(
-                bottom: -50,
+                bottom: -45,
                 right: 0,
                 child: Image.asset(
                   "assets/cars/tech.webp",
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.45,
                 )),
+          ],
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        // Contact
+        Stack(
+          overflow: Overflow.visible,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              margin: EdgeInsets.symmetric(vertical: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: new LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xffFF3D2C2C),
+                    Colors.blue,
+                  ],
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Contact Support",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 20),
+                    child: Text(
+                      "Search number your nearest Technician and Tow Truck in your home town",
+                      style: TextStyle(
+                          color: Color(0xffFFE5E3E3),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15),
+                    ),
+                  ),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xffff0000)),
+                      ),
+                      onPressed: () async {
+                        if (await Permission.location.request().isGranted) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Map()));
+                        }
+                      },
+                      child: Text("Book Now"))
+                ],
+              ),
+            ),
+            Positioned(
+                bottom: -30,
+                right: 0,
+                child: Image.asset(
+                  "assets/cars/pinkcar.png",
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 150,
+                ))
           ],
         ),
         SizedBox(

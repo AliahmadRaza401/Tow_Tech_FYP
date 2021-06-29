@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,9 +34,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: MediaQuery.of(context).orientation == Orientation.portrait ?
-        portrait() : landscape()
-      ),
+          child: MediaQuery.of(context).orientation == Orientation.portrait
+              ? portrait()
+              : landscape()),
     );
   }
 
@@ -91,8 +90,8 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: circular
               ? CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-          )
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                )
               : Text(
                   "Sign Up",
                   style: TextStyle(
@@ -185,7 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   //Portrait
-Widget portrait(){
+  Widget portrait() {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -199,7 +198,8 @@ Widget portrait(){
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/logo/wlogo.png',
+              Image.asset(
+                'assets/logo/wlogo.png',
                 width: MediaQuery.of(context).size.width * .3,
                 height: MediaQuery.of(context).size.height * .2,
 
@@ -234,10 +234,9 @@ Widget portrait(){
           SizedBox(
             height: 20,
           ),
-          buttonItem("assets/google.svg", "Continue with Google", 25,
-                  () async {
-                await authClass.googleSignIn(context);
-              }),
+          buttonItem("assets/google.svg", "Continue with Google", 25, () async {
+            await authClass.googleSignIn(context);
+          }),
           // SizedBox(
           //   height: 15,
           // ),
@@ -279,13 +278,13 @@ Widget portrait(){
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (builder) => SignInPage()),
-                          (route) => false);
+                      (route) => false);
                 },
                 child: Text(
                   "Login",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
+                    color: Color(0xffff0000),
+                    fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -295,10 +294,10 @@ Widget portrait(){
         ],
       ),
     );
-}
+  }
 
   //Landscape
-  Widget landscape(){
+  Widget landscape() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 55),
       height: MediaQuery.of(context).size.height,
@@ -314,7 +313,8 @@ Widget portrait(){
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo/wlogo.png',
+                Image.asset(
+                  'assets/logo/wlogo.png',
                   width: MediaQuery.of(context).size.width * .2,
                   height: MediaQuery.of(context).size.height * .2,
 
@@ -354,9 +354,9 @@ Widget portrait(){
               height: 20,
             ),
             buttonItem("assets/google.svg", "Continue with Google", 25,
-                    () async {
-                  await authClass.googleSignIn(context);
-                }),
+                () async {
+              await authClass.googleSignIn(context);
+            }),
             // SizedBox(
             //   height: 15,
             // ),
@@ -398,7 +398,7 @@ Widget portrait(){
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (builder) => SignInPage()),
-                            (route) => false);
+                        (route) => false);
                   },
                   child: Text(
                     "Login",
@@ -452,5 +452,4 @@ Widget portrait(){
       ],
     ),
   );
-
 }

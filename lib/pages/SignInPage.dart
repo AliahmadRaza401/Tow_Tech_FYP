@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -35,9 +34,9 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: MediaQuery.of(context).orientation == Orientation.portrait ?
-            portrait() : landscape()
-      ),
+          child: MediaQuery.of(context).orientation == Orientation.portrait
+              ? portrait()
+              : landscape()),
     );
   }
 
@@ -65,7 +64,9 @@ class _SignInPageState extends State<SignInPage> {
               MaterialPageRoute(builder: (builder) => Home()),
               (route) => false);
         } catch (e) {
-          final snackbar = SnackBar(content: Text("Email or Password Not Matched, OR Check Network Connection"));
+          final snackbar = SnackBar(
+              content: Text(
+                  "Email or Password Not Matched, OR Check Network Connection"));
           // final snackbar = SnackBar(content: Text(e.toString()));
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
           fToast.showToast(
@@ -92,8 +93,8 @@ class _SignInPageState extends State<SignInPage> {
         child: Center(
           child: circular
               ? CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-          )
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                )
               : Text(
                   "Sign In",
                   style: TextStyle(
@@ -186,7 +187,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   //Portrait
-Widget portrait(){
+  Widget portrait() {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -197,9 +198,10 @@ Widget portrait(){
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/logo/wlogo.png',
-              width: MediaQuery.of(context).size.width * .3,
-              // height: MediaQuery.of(context),
+              Image.asset(
+                'assets/logo/wlogo.png',
+                width: MediaQuery.of(context).size.width * .3,
+                // height: MediaQuery.of(context),
               ),
             ],
           ),
@@ -261,13 +263,13 @@ Widget portrait(){
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (builder) => SignUpPage()),
-                          (route) => false);
+                      (route) => false);
                 },
                 child: Text(
                   "SignUp",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
+                    color: Color(0xffff0000),
+                    fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -288,10 +290,10 @@ Widget portrait(){
         ],
       ),
     );
-}
+  }
 
   //Landscape
-  Widget landscape(){
+  Widget landscape() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 40),
       height: MediaQuery.of(context).size.height,
@@ -304,7 +306,8 @@ Widget portrait(){
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo/wlogo.png',
+                Image.asset(
+                  'assets/logo/wlogo.png',
                   width: MediaQuery.of(context).size.width * .2,
                   height: MediaQuery.of(context).size.height * .2,
 
@@ -367,7 +370,7 @@ Widget portrait(){
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (builder) => SignUpPage()),
-                            (route) => false);
+                        (route) => false);
                   },
                   child: Text(
                     "SignUp",
@@ -432,6 +435,4 @@ Widget portrait(){
       ],
     ),
   );
-
-
 }

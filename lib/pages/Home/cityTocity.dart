@@ -3,11 +3,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:tow_tech_fyp/pages/Home/map.dart';
 
 class CityToCity extends StatefulWidget {
-  
   var latitude;
   var longitude;
-  CityToCity({this.latitude,this.longitude});
-  
+  CityToCity({this.latitude, this.longitude});
+
   @override
   _CityToCityState createState() => _CityToCityState();
 }
@@ -17,13 +16,14 @@ class _CityToCityState extends State<CityToCity> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: MediaQuery.of(context).orientation == Orientation.portrait ?
-      portrait() : landScape(),
+      body: MediaQuery.of(context).orientation == Orientation.portrait
+          ? portrait()
+          : landScape(),
     );
   }
 
   // LandScape
-  Widget landScape (){
+  Widget landScape() {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -51,38 +51,40 @@ class _CityToCityState extends State<CityToCity> {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back_rounded,
+                      icon: const Icon(
+                        Icons.arrow_back_rounded,
                         color: Colors.white,
-                        size: 30,),
-                      onPressed: (){
+                        size: 30,
+                      ),
+                      onPressed: () {
                         Navigator.pop(context);
                       },
                     ),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40 ),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         children: [
-                          Text("City To City", style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold
-                          ),)
+                          Text(
+                            "City To City",
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                       Column(
                         children: [
                           Image.asset("assets/logo/city.png",
-                              width:MediaQuery.of(context).size.width * 0.1),
+                              width: MediaQuery.of(context).size.width * 0.1),
                         ],
                       ),
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
@@ -90,27 +92,27 @@ class _CityToCityState extends State<CityToCity> {
         Positioned(
           bottom: 0,
           child: Container(
-            width:MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.53,
             decoration: BoxDecoration(
               color: Color(0xffF2F5F8),
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(70),
-                  topLeft: Radius.circular(70)),
+                  topRight: Radius.circular(70), topLeft: Radius.circular(70)),
             ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 30, left: 30,bottom: 30),
+                    padding: EdgeInsets.only(top: 30, left: 30, bottom: 30),
                     child: Row(
                       children: [
-                        Text("What do you Need?", style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15
-
-                        ),),
+                        Text(
+                          "What do you Need?",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15),
+                        ),
                       ],
                     ),
                   ),
@@ -120,11 +122,17 @@ class _CityToCityState extends State<CityToCity> {
                       Column(
                         children: [
                           GestureDetector(
-                            onTap: ()async{
-                              if (await Permission.location.request().isGranted)
-                              {
-                                Navigator.push(context, MaterialPageRoute(builder:
-                                    (context)=> Map()));
+                            onTap: () async {
+                              if (await Permission.location
+                                  .request()
+                                  .isGranted) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Map(
+                                              cityType: "City To City",
+                                              service: "Technician",
+                                            )));
                               }
                             },
                             child: Container(
@@ -138,12 +146,14 @@ class _CityToCityState extends State<CityToCity> {
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: Offset(0, 3), // changes position of shadow
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
@@ -151,14 +161,18 @@ class _CityToCityState extends State<CityToCity> {
                                         children: [
                                           Row(
                                             children: [
-                                              Image.asset("assets/logo/techlogo.png",
-                                                width: 50 ,),
-                                              Text("  Technician", style: TextStyle(
-                                                  color: Colors.black87,
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w600
-                                              ),),
-
+                                              Image.asset(
+                                                "assets/logo/techlogo.png",
+                                                width: 50,
+                                              ),
+                                              Text(
+                                                "  Technician",
+                                                style: TextStyle(
+                                                    color: Colors.black87,
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
                                             ],
                                           ),
                                         ],
@@ -167,9 +181,11 @@ class _CityToCityState extends State<CityToCity> {
                                   ),
                                   Column(
                                     children: [
-                                      Icon(Icons.arrow_forward_ios_rounded,
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
                                         color: Colors.redAccent,
-                                        size: 35,)
+                                        size: 35,
+                                      )
                                     ],
                                   ),
                                 ],
@@ -181,16 +197,23 @@ class _CityToCityState extends State<CityToCity> {
                       Column(
                         children: [
                           GestureDetector(
-                            onTap: ()async{
-                              if (await Permission.location.request().isGranted)
-                              {
-                                Navigator.push(context, MaterialPageRoute(builder:
-                                    (context)=> Map()));
+                            onTap: () async {
+                              if (await Permission.location
+                                  .request()
+                                  .isGranted) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Map(
+                                              cityType: "City To City",
+                                              service: "Towing Truck",
+                                            )));
                               }
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.3,
-                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 3),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 3),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(25),
@@ -199,32 +222,41 @@ class _CityToCityState extends State<CityToCity> {
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: Offset(0, 3), // changes position of shadow
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
                                       Row(
                                         children: [
-                                          Image.asset("assets/logo/towlogo.png",width: 90,),
-                                          Text("Tow Vehicle", style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w600
-                                          ),),
+                                          Image.asset(
+                                            "assets/logo/towlogo.png",
+                                            width: 90,
+                                          ),
+                                          Text(
+                                            "Tow Vehicle",
+                                            style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         ],
                                       ),
                                     ],
                                   ),
                                   Column(
                                     children: [
-                                      Icon(Icons.arrow_forward_ios_rounded,
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
                                         color: Colors.redAccent,
-                                        size: 35,)
+                                        size: 35,
+                                      )
                                     ],
                                   ),
                                 ],
@@ -235,8 +267,6 @@ class _CityToCityState extends State<CityToCity> {
                       ),
                     ],
                   ),
-
-
                 ],
               ),
             ),
@@ -247,7 +277,7 @@ class _CityToCityState extends State<CityToCity> {
   }
 
   // Portraite
-  Widget portrait (){
+  Widget portrait() {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -274,38 +304,40 @@ class _CityToCityState extends State<CityToCity> {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back_rounded,
+                      icon: const Icon(
+                        Icons.arrow_back_rounded,
                         color: Colors.white,
-                        size: 30,),
-                      onPressed: (){
+                        size: 30,
+                      ),
+                      onPressed: () {
                         Navigator.pop(context);
                       },
                     ),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20,top: 20 ),
+                  padding: EdgeInsets.only(left: 20, top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         children: [
-                          Text("City To City", style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold
-                          ),)
+                          Text(
+                            "City To City",
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                       Column(
                         children: [
                           Image.asset("assets/logo/city.png",
-                              width:MediaQuery.of(context).size.width * 0.3),
+                              width: MediaQuery.of(context).size.width * 0.3),
                         ],
                       ),
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
@@ -313,35 +345,39 @@ class _CityToCityState extends State<CityToCity> {
         Positioned(
           bottom: 0,
           child: Container(
-            width:MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.6,
             decoration: BoxDecoration(
               color: Color(0xffF2F5F8),
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(70),
-                  topLeft: Radius.circular(70)),
+                  topRight: Radius.circular(70), topLeft: Radius.circular(70)),
             ),
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 40, left: 30,bottom: 70),
+                  padding: EdgeInsets.only(top: 40, left: 30, bottom: 70),
                   child: Row(
                     children: [
-                      Text("What do you Need?", style: TextStyle(
-                          color: Colors.blueGrey,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15
-
-                      ),),
+                      Text(
+                        "What do you Need?",
+                        style: TextStyle(
+                            color: Colors.blueGrey,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15),
+                      ),
                     ],
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()async{
-                    if (await Permission.location.request().isGranted)
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder:
-                          (context)=> Map()));
+                  onTap: () async {
+                    if (await Permission.location.request().isGranted) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Map(
+                                    cityType: "City To City",
+                                    service: "Technician",
+                                  )));
                     }
                   },
                   child: Container(
@@ -368,14 +404,17 @@ class _CityToCityState extends State<CityToCity> {
                               children: [
                                 Row(
                                   children: [
-                                    Image.asset("assets/logo/techlogo.png",
-                                      width: 50 ,),
-                                    Text("  Technician", style: TextStyle(
-                                        color: Colors.black87,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600
-                                    ),),
-
+                                    Image.asset(
+                                      "assets/logo/techlogo.png",
+                                      width: 50,
+                                    ),
+                                    Text(
+                                      "  Technician",
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -384,9 +423,11 @@ class _CityToCityState extends State<CityToCity> {
                         ),
                         Column(
                           children: [
-                            Icon(Icons.arrow_forward_ios_rounded,
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
                               color: Colors.redAccent,
-                              size: 35,)
+                              size: 35,
+                            )
                           ],
                         ),
                       ],
@@ -397,11 +438,15 @@ class _CityToCityState extends State<CityToCity> {
                   height: 40,
                 ),
                 GestureDetector(
-                  onTap: ()async{
-                    if (await Permission.location.request().isGranted)
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder:
-                          (context)=> Map()));
+                  onTap: () async {
+                    if (await Permission.location.request().isGranted) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Map(
+                                    cityType: "City To City",
+                                    service: "Towing Truck",
+                                  )));
                     }
                   },
                   child: Container(
@@ -426,28 +471,34 @@ class _CityToCityState extends State<CityToCity> {
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/logo/towlogo.png",width: 90,),
-                                Text("Tow Vehicle", style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600
-                                ),),
+                                Image.asset(
+                                  "assets/logo/towlogo.png",
+                                  width: 90,
+                                ),
+                                Text(
+                                  "Tow Vehicle",
+                                  style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ],
                             ),
                           ],
                         ),
                         Column(
                           children: [
-                            Icon(Icons.arrow_forward_ios_rounded,
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
                               color: Colors.redAccent,
-                              size: 35,)
+                              size: 35,
+                            )
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
