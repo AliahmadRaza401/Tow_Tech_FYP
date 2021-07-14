@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -140,18 +141,20 @@ Widget approved() {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               "Your request has been accepted.",
               style: TextStyle(color: Colors.black),
+              maxLines: 1,
             ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               "Our service man reached shortly",
               style: TextStyle(color: Colors.black),
+              maxLines: 1,
             ),
           ],
         ),
@@ -197,9 +200,10 @@ Widget reject() {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               "Your request has been Rejected.",
               style: TextStyle(color: Colors.black),
+              maxLines: 1,
             ),
           ],
         ),

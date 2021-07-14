@@ -376,8 +376,13 @@ class _HomeState extends State<Home> {
                     ),
                     onPressed: () async {
                       if (await Permission.location.request().isGranted) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Map()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Map(
+                                      cityType: "WithIn City",
+                                      service: "Towing Truck",
+                                    )));
                       }
                     },
                     child: Text("Book Now"),
@@ -441,8 +446,13 @@ class _HomeState extends State<Home> {
                       ),
                       onPressed: () async {
                         if (await Permission.location.request().isGranted) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Map()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Map(
+                                        cityType: "WithIn City",
+                                        service: "Technician",
+                                      )));
                         }
                       },
                       child: Text("Book Now"))
@@ -508,8 +518,10 @@ class _HomeState extends State<Home> {
                       ),
                       onPressed: () async {
                         if (await Permission.location.request().isGranted) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Map()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Contact()));
                         }
                       },
                       child: Text("Book Now"))
@@ -606,17 +618,40 @@ class _HomeState extends State<Home> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // getName(),
-                      Text(
-                        "Tow & ",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Tow & ",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Tech",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(
-                        "Tech",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: Icon(
+                                Icons.notifications_active,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                dialog(context);
+                                // Navigator.of(context).push(MaterialPageRoute(
+                                //     builder: (context) => Notifi()));
+                              })
+                        ],
                       ),
                     ],
                   ),

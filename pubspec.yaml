@@ -42,6 +42,8 @@ dependencies:
   sentry_flutter: ^4.0.0
   suggestion_search_bar: ^0.0.2
   flutter_phone_direct_caller: ^2.0.0
+  auto_size_text: ^2.1.0
+
 #  search_map_place: ^0.2.0
 
 
