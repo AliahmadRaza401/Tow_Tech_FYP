@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tow_tech_fyp/pages/Home/home.dart';
 
 class Map extends StatefulWidget {
   var cityType, service;
@@ -64,17 +65,17 @@ class _MapState extends State<Map> {
       }).then((_) {
         print("success!");
       });
-
-      fToast.showToast(
-          child: toast("Location Save Successfully!"),
-          toastDuration: Duration(seconds: 4),
-          positionedToastBuilder: (context, child) {
-            return Positioned(
-              child: child,
-              left: MediaQuery.of(context).size.width * 0.2,
-              bottom: 250,
-            );
-          });
+      showAlertDialog();
+      // fToast.showToast(
+      //     child: toast("Location Save Successfully!"),
+      //     toastDuration: Duration(seconds: 4),
+      //     positionedToastBuilder: (context, child) {
+      //       return Positioned(
+      //         child: child,
+      //         left: MediaQuery.of(context).size.width * 0.2,
+      //         bottom: 250,
+      //       );
+      //     });
     } catch (e) {
       fToast.showToast(
           child: toast(e),
@@ -238,6 +239,50 @@ class _MapState extends State<Map> {
           ),
         ],
       ),
+    );
+  }
+
+  // login alert
+  showAlertDialog() {
+    setState(() {
+      // _loading = false;
+    });
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("Okay"),
+      onPressed: () {
+        // Navigator.pop(context);
+        Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (context) => Home()));
+      },
+    );
+    // Widget continueButton = FlatButton(
+    //   child: Text("Continue"),
+    //   onPressed: () {
+    //     // Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context)=> UserRegistration(userMobile:mobileController.text)));
+    //   },
+    // );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(
+        "Location Save Successfully!",
+        style: TextStyle(fontSize: 20),
+      ),
+      content: Text(
+        "Go to Home Page verify approval Notification",
+        // style: TextStyle(fontSize: 18,fontFamily: Variable.fontStyle),
+      ),
+      actions: [
+        cancelButton,
+        // continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

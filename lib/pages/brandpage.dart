@@ -166,7 +166,9 @@ class _BrandPageState extends State<BrandPage> {
       "Vehicale_Number": vehNumber,
       "Services": "",
       "CityType": "",
-      "Location": {"latitude": "", "longitude": ""}
+      "Location": {"latitude": "", "longitude": ""},
+      "Status": "",
+      "id": firebaseUser.uid
     }, SetOptions(merge: true)).then((_) {
       print("Data Save Success!");
     });

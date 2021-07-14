@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
 
-    if (firebaseUser != null) {
+    if (firebaseUser != null){
       setState(() {
         currentPage = Home();
       });

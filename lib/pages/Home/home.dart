@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tow_tech_fyp/Service/Auth_Service.dart';
+import 'package:tow_tech_fyp/Widget/dialog.dart';
 import 'package:tow_tech_fyp/pages/Home/cityTocity.dart';
 import 'package:tow_tech_fyp/pages/Home/contact.dart';
 import 'package:tow_tech_fyp/pages/Home/map.dart';
@@ -20,65 +20,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   AuthClass authClass = AuthClass();
 
-  // Position _currentPosition;
-  // var latitude ;
-  // var longitude;
-  // bool map = false;
-  // final db = FirebaseFirestore.instance;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     // _getCurrentLocation();
   }
-
-  // getName() {
-  //   return StreamBuilder(
-  //     stream: FirebaseFirestore.instance.collection("User").snapshots(),
-  //     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-  //       if (!snapshot.hasData) {
-  //         return Text("Loading...");
-  //       }
-  //       else if(snapshot.hasData)
-  //         {
-  //           return Text(snapshot.data.docs[2]["firstName"]);
-  //             // Row(
-  //             // mainAxisAlignment: MainAxisAlignment.start,
-  //             // children: [
-  //             //   Column(
-  //             //     children: [
-  //             //       Text(snapshot.data.docs[0]["firstName"],
-  //             //         style: TextStyle(
-  //             //             fontWeight: FontWeight.w600,
-  //             //             fontSize: 20,
-  //             //             color: Color(0xffFFEEE5E5)),
-  //             //       ),
-  //             //     ],
-  //             //   ),
-  //               // Padding(
-  //               //   padding: EdgeInsets.only(left: 5),
-  //               //   child: Column(
-  //               //     children: [
-  //               //       Text(snapshot.data.docs[0]["lastName"],
-  //               //         style: TextStyle(
-  //               //             fontWeight: FontWeight.w600,
-  //               //             fontSize: 20,
-  //               //             color: Color(0xffFFEEE5E5)),
-  //               //       ),
-  //               //     ],
-  //               //   ),
-  //               // ),
-  //
-  //           //   ],
-  //           // );
-  //         }
-  //       else
-  //         return Text("Error....");
-  //
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +48,7 @@ class _HomeState extends State<Home> {
         Container(
           width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 0.33,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.red,
             image: new DecorationImage(
@@ -123,65 +71,92 @@ class _HomeState extends State<Home> {
           child: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "WellCome!",
-                            style: TextStyle(
-                                fontSize: 35,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800),
-                          )
-                        ],
-                      ),
-                      Column(children: [
-                        IconButton(
-                            icon: Icon(
-                              Icons.logout,
-                              size: 30,
+              child: Container(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "WellCome!",
+                              style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800),
+                            )
+                          ],
+                        ),
+                        Column(children: [
+                          IconButton(
+                              icon: Icon(
+                                Icons.logout,
+                                size: 30,
+                              ),
+                              onPressed: () async {
+                                await authClass.logout();
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (builder) => SignUpPage()),
+                                    (route) => false);
+                              })
+                        ]),
+                      ],
+                    ),
+                    // Row(
+                    //   children: [
+                    //     Text("In", style: TextStyle(
+                    //       fontSize: 20
+                    //     ),)
+                    //   ],
+                    // ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // getName(),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Tow & ",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "Tech",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                            onPressed: () async {
-                              await authClass.logout();
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => SignUpPage()),
-                                  (route) => false);
-                            })
-                      ]),
-                    ],
-                  ),
-                  // Row(
-                  //   children: [
-                  //     Text("In", style: TextStyle(
-                  //       fontSize: 20
-                  //     ),)
-                  //   ],
-                  // ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      // getName(),
-                      Text(
-                        "Tow & ",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Tech",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                icon: Icon(
+                                  Icons.notifications_active,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  dialog(context);
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //     builder: (context) => Notifi()));
+                                })
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -64,13 +64,14 @@ class _SignUpPageState extends State<SignUpPage> {
               MaterialPageRoute(builder: (builder) => Name()),
               (route) => false);
         } catch (e) {
-          final snackbar = SnackBar(content: Text(e.toString()));
-          ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          fToast.showToast(
-            child: toastFail,
-            gravity: ToastGravity.BOTTOM,
-            toastDuration: Duration(seconds: 2),
-          );
+          showAlertDialog();
+          // final snackbar = SnackBar(content: Text(e.toString()));
+          // ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          // fToast.showToast(
+          //   child: toastFail,
+          //   gravity: ToastGravity.BOTTOM,
+          //   toastDuration: Duration(seconds: 2),
+          // );
           setState(() {
             circular = false;
           });
@@ -149,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget textItem(
       String labeltext, TextEditingController controller, bool obscureText) {
     return Container(
-      width: MediaQuery.of(context).size.width - 70,
+      width: MediaQuery.of(context).size.width * 0.8,
       height: 55,
       child: TextFormField(
         controller: controller,
@@ -283,7 +284,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Text(
                   "Login",
                   style: TextStyle(
-                    color: Color(0xffff0000),
+                    color: Colors.blue,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -452,4 +453,84 @@ class _SignUpPageState extends State<SignUpPage> {
       ],
     ),
   );
+
+  void showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Text("An Error Occurs"),
+              content: Text(message),
+              actions: [
+                FlatButton(
+                  child: Text("Okay"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
+  }
+
+  // Alert Dialog
+
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          SizedBox(
+            width: 30,
+          ),
+          Container(
+              margin: EdgeInsets.only(left: 3),
+              child: Text("Logging.. Please wait...")),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => alert,
+    );
+  }
+
+  // login alert
+  showAlertDialog() {
+    setState(() {
+      // _loading = false;
+    });
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("Okay"),
+      onPressed: () {
+        Navigator.pop(context);
+        // Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> UserLogin()));
+      },
+    );
+    // Widget continueButton = FlatButton(
+    //   child: Text("Continue"),
+    //   onPressed: () {
+    //     // Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context)=> UserRegistration(userMobile:mobileController.text)));
+    //   },
+    // );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Try Again!"),
+      content: Text(
+        " Some thing went wrong!",
+        // style: TextStyle(fontSize: 18,fontFamily: Variable.fontStyle),
+      ),
+      actions: [
+        cancelButton,
+        // continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }

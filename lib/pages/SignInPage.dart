@@ -268,7 +268,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: Text(
                   "SignUp",
                   style: TextStyle(
-                    color: Color(0xffff0000),
+                    color: Colors.blue,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
